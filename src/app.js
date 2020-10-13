@@ -7,29 +7,18 @@
  * @version 1.0.0
  */
 // Imports
-import { Deck } from './Deck.js'
-// From https://nodejs.org/api/readline.html
-import readline from 'readline'
-// Readline interface?
-const rl = readline.createInterface({
-  input: process.stdin,
-  output: process.stdout
-})
+import { howManyPlayers } from './PromptModule.js'
+import * as Player from './Player.js'
 
-// Create a deck of 52 cards
-const playingCards = Deck.create()
-// Shuffle the deck
-Deck.shuffle(playingCards)
+export const main = function () {
+  const players = []
 
-// Reduce function to be used multiple times
-const reducer = (a, b) => a + b
-
-const main = function () {
-  rl.question('How many players? ', (answer) => {
-    console.log(`Number of players will be ${answer}`)
-
-    rl.close()
-  })
+  // Loop to create an array of players
+  for (let n = 0; n < howManyPlayers(10); n++) {
+    const player = new Player.Player(Player.randomName(), Player.cardPicker(2))
+    players.push(player)
+  }
+  console.table(players)
 }
 
 main()
