@@ -7,18 +7,32 @@
  * @version 1.0.0
  */
 // Imports
-import { howManyPlayers } from './PromptModule.js'
 import * as Player from './Player.js'
 
 export const main = function () {
   const players = []
-
+  let nameAddition = 1
+  const numberOfPlayers = 3
   // Loop to create an array of players
-  for (let n = 0; n < howManyPlayers(10); n++) {
+  for (let n = 0; n < numberOfPlayers; n++) {
+    if (players.length < 1) {
+      const dealer = new Player.Player('Dealer', Player.cardPicker(1))
+      players.push(dealer)
+    }
     const player = new Player.Player(Player.randomName(), Player.cardPicker(2))
-    players.push(player)
+    if (players.some(x => x.name === player.name)) {
+      player.name += ' #' + nameAddition
+      nameAddition++
+      players.push(player)
+    } else {
+      players.push(player)
+    }
   }
   console.table(players)
 }
 
-main()
+try {
+  main()
+} catch (err) {
+  console.error(err.message)
+}
