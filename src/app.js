@@ -10,9 +10,24 @@
 import * as Player from './Player.js'
 
 export const main = function () {
+  process.on('exit', (code) => {
+    console.log(`About to exit with code: ${code}. Good bye!`)
+  })
+
+  let numberOfPlayers
+  if (process.argv.length > 2) {
+    numberOfPlayers = process.argv.slice(2).map(Number)
+    if (isNaN(numberOfPlayers)) {
+      console.log('Invalid number!')
+      process.exit(0)
+    }
+  } else {
+    numberOfPlayers = 3
+  }
+
+  console.log(`You have chosen ${numberOfPlayers} players.`)
   const players = []
-  let nameAddition = 1
-  const numberOfPlayers = 3
+  let nameAddition = 2
   // Loop to create an array of players
   for (let n = 0; n < numberOfPlayers; n++) {
     if (players.length < 1) {
