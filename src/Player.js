@@ -27,17 +27,26 @@ export const randomName = function () {
 
 // Picks any specified number of cards from the deck
 export const cardPicker = function (x) {
-  if (cards.length < 2) {
-    throw new Error('Not enough cards left! Please choose a less amount of players.')
-  } else {
-    const hand = cards.splice(0, x)
+  let hand = 0
+  if (x === hand) {
     return hand
+  } else {
+    if (cards.length < 2) {
+      throw new Error('Not enough cards left! Please choose a less amount of players.')
+    } else {
+      hand = cards.splice(0, x)
+      return hand
+    }
   }
 }
 
 export const sum = function (x) {
-  x = x.reduce(reducer)
-  return x
+  if (x === 0) {
+    return x
+  } else {
+    x = x.reduce(reducer)
+    return x
+  }
 }
 
 export const checkDealer = function (name) {
@@ -51,8 +60,13 @@ export const checkDealer = function (name) {
 export class Player {
   constructor (name, hand) {
     this.name = name
-    this.hand = hand.join(', ')
-    this.sum = sum(hand)
+    this.hand = hand
+    if (hand === 0) {
+      this.hand = ''
+    } else {
+      this.hand = hand.join(', ')
+    }
+    this.sum = sum(hand).toString()
     this.ifDealer = checkDealer(name)
   }
 }
