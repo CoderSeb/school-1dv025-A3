@@ -1,5 +1,3 @@
-const reducer = (a, b) => a + b
-
 // Random name function
 export const randomName = function () {
   const nameArray = [
@@ -35,33 +33,13 @@ export const cardPicker = function (deck, x) {
   }
 }
 
-export const sum = function (x) {
-  if (x === 0) {
-    return x
-  } else {
-    x = x.reduce(reducer)
-    return x
-  }
-}
-
-export const checkDealer = function (name) {
-  if (name === 'Dealer') {
-    return true
-  } else {
-    return false
-  }
-}
-
 export class Player {
-  constructor (name, hand) {
+  constructor (name, hand, sum) {
     this.name = name
     this.hand = hand
     if (hand === 0) {
       this.hand = ''
-    } else {
-      this.hand = hand.join(', ')
     }
-    this.sum = sum(hand).toString()
-    this.ifDealer = checkDealer(name)
+    this.sum = sum
   }
 }
