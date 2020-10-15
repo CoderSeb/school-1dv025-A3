@@ -23,17 +23,6 @@ export function createPlayers (numberOfPlayers, deck, players) {
   return players
 }
 
-const sum = function (string) {
-  if (string === '') {
-    return string
-  } else {
-    let x = string.split(', ')
-    x = x.map(element => PlayingCard.valueOf(element))
-    x = x.reduce((a, b) => a + b)
-    return x
-  }
-}
-
 function askForOneCard (deck) {
   const card = Player.cardPicker(deck, 1)
   return card
@@ -51,8 +40,9 @@ export function playTurn (deck, players) {
     const thisPlayer = players[i]
     const dealer = players[0]
     thisPlayer.hand += ', ' + askForOneCard(deck)
-    thisPlayer.sum = sum(thisPlayer.hand)
+    Player.Player.sum(thisPlayer.hand)
     let winStatus = false
+    console.log(thisPlayer)
     if (thisPlayer.sum === 21) {
       console.log(`${thisPlayer.name} has got ${thisPlayer.sum} and won!`)
       winStatus = true
@@ -65,13 +55,15 @@ export function playTurn (deck, players) {
       console.log(`${thisPlayer.name} has got ${thisPlayer.sum}... BUSTED!`)
     }
     if (winStatus === false && thisPlayer.sum < 16) {
-      thisPlayer.hand += askForOneCard(deck)
+      thisPlayer.hand += ', ' + askForOneCard(deck)
     } else {
       console.log(`${thisPlayer.name} is satisfied with his cards ${thisPlayer.hand}. Let's see what the dealer has.`)
     }
     // Dealer turn!
-    for (let i = 0; i < 2; i++) {
-      dealer.hand += askForOneCard(deck)
+    if (dealer.hand.length < 1) {
+      dealer.hand += `${askForOneCard(deck)}, ${askForOneCard(deck)}`
+    } else {
+      dealer.hand += ', ' + askForOneCard(deck)
     }
   }
 }

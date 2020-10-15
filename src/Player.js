@@ -1,3 +1,5 @@
+import { PlayingCard } from './PlayingCard.js'
+
 // Random name function
 export const randomName = function () {
   const nameArray = [
@@ -34,12 +36,24 @@ export const cardPicker = function (deck, x) {
 }
 
 export class Player {
-  constructor (name, hand, sum) {
+  constructor (name, hand) {
     this.name = name
     this.hand = hand
     if (hand === 0) {
       this.hand = ''
     }
-    this.sum = sum
+    this.sum = Player.sum(hand)
+  }
+
+  static sum (hand) {
+    let x = hand
+    if (x.length < 2) {
+      x = valueOf(x)
+      return x
+    } else if (x === 0) {
+      return x
+    } else if (x.length > 2) {
+      x.reduce((value, playingCard) => value + playingCard)
+    }
   }
 }
