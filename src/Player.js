@@ -1,8 +1,3 @@
-import { Deck } from './Deck.js'
-
-const cards = Deck.create()
-Deck.shuffle(cards)
-
 const reducer = (a, b) => a + b
 
 // Random name function
@@ -26,15 +21,15 @@ export const randomName = function () {
 }
 
 // Picks any specified number of cards from the deck
-export const cardPicker = function (x) {
+export const cardPicker = function (deck, x) {
   let hand = 0
   if (x === hand) {
     return hand
   } else {
-    if (cards.length < 2) {
+    if (deck.length < 2) {
       throw new Error('Not enough cards left! Please choose a less amount of players.')
     } else {
-      hand = cards.splice(0, x)
+      hand = deck.splice(0, x)
       return hand
     }
   }

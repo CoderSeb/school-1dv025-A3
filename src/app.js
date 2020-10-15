@@ -9,6 +9,7 @@
 // Imports
 import * as GameLogic from './GameLogic.js'
 import ChoosePlayers from './ChoosePlayers.js'
+import { Deck } from './Deck.js'
 
 export const main = function () {
   process.on('exit', (code) => {
@@ -18,11 +19,16 @@ export const main = function () {
   const numberOfPlayers = ChoosePlayers()
   console.log(`You have chosen ${numberOfPlayers} players.`)
 
-  let players = []
+  const participants = []
 
-  GameLogic.createPlayers(numberOfPlayers, players)
-  console.table(players)
+  const deck = Deck.create()
+  Deck.shuffle(deck)
 
+  GameLogic.createPlayers(numberOfPlayers, deck, participants)
+  console.table(participants)
+
+  GameLogic.firstDeal(deck, participants)
+  console.table(participants)
 }
 
 try {
