@@ -30,7 +30,7 @@ export const main = function () {
   GameLogic.firstDeal(deck, participants)
 
   GameLogic.playTurn(deck, participants)
-  console.table(participants)
+  console.log(participants)
 }
 
 try {

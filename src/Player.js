@@ -1,4 +1,5 @@
 import { PlayingCard } from './PlayingCard.js'
+import { Ranks } from './Ranks.js'
 
 // Random name function
 export const randomName = function () {
@@ -40,20 +41,26 @@ export class Player {
     this.name = name
     this.hand = hand
     if (hand === 0) {
-      this.hand = ''
+      this.hand = []
     }
     this.sum = Player.sum(hand)
   }
 
   static sum (hand) {
-    let x = hand
-    if (x.length < 2) {
-      x = valueOf(x)
-      return x
-    } else if (x === 0) {
-      return x
-    } else if (x.length > 2) {
-      x.reduce((value, playingCard) => value + playingCard)
+    const x = hand
+    let handObj = {}
+    let value = []
+    let result
+    if (x === 0) {
+      return result
+    } else {
+      for (let i = 0; i < x.length; i++) {
+        Object.assign(handObj, x[i])
+        let cardRank = handObj[0].rank
+        value.push(cardRank)
+      }
+      result = value.reduce((a, b) => a + b, 0)
     }
+    return result
   }
 }

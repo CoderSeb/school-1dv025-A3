@@ -30,7 +30,7 @@ function askForOneCard (deck) {
 
 export function firstDeal (deck, players) {
   for (let i = 1; i < players.length; i++) {
-    players[i].hand += askForOneCard(deck)
+    players[i].hand.push(askForOneCard(deck))
   }
   return players
 }
@@ -39,31 +39,30 @@ export function playTurn (deck, players) {
   for (let i = 1; i < players.length; i++) {
     const thisPlayer = players[i]
     const dealer = players[0]
-    thisPlayer.hand += ', ' + askForOneCard(deck)
-    Player.Player.sum(thisPlayer.hand)
-    let winStatus = false
-    console.log(thisPlayer)
+    thisPlayer.hand.push(askForOneCard(deck))
+    thisPlayer.sum = Player.Player.sum(thisPlayer.hand)
+    thisPlayer.winStatus = false
+    console.log(thisPlayer.hand.join(', '))
     if (thisPlayer.sum === 21) {
       console.log(`${thisPlayer.name} has got ${thisPlayer.sum} and won!`)
-      winStatus = true
+      thisPlayer.winStatus = true
     }
     if (thisPlayer.sum < 21 && thisPlayer.hand.length === 5) {
       console.log(`${thisPlayer.name} has ${thisPlayer.hand.length} cards with a total value under 21 and therefore wins!`)
-      winStatus = true
+      thisPlayer.winStatus = true
     }
     if (thisPlayer.sum > 21) {
       console.log(`${thisPlayer.name} has got ${thisPlayer.sum}... BUSTED!`)
     }
-    if (winStatus === false && thisPlayer.sum < 16) {
-      thisPlayer.hand += ', ' + askForOneCard(deck)
+    if (thisPlayer.winStatus === false && thisPlayer.sum < 16) {
+      thisPlayer.hand.push(askForOneCard(deck))
     } else {
-      console.log(`${thisPlayer.name} is satisfied with his cards ${thisPlayer.hand}. Let's see what the dealer has.`)
+      console.log(`${thisPlayer.name} is satisfied with his cards ${thisPlayer.hand.join(', ')}. Let's see what the dealer has.`)
     }
     // Dealer turn!
-    if (dealer.hand.length < 1) {
-      dealer.hand += `${askForOneCard(deck)}, ${askForOneCard(deck)}`
-    } else {
-      dealer.hand += ', ' + askForOneCard(deck)
+    for (let i = 0; i < 2; i++) {
+      dealer.hand.push(askForOneCard(deck))
+      dealer.sum = Player.Player.sum(dealer.hand)
     }
   }
 }
