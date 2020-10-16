@@ -23,14 +23,15 @@ export const main = function () {
 
   const deck = Deck.create()
   Deck.shuffle(deck)
-  console.log(`Number of cards in the deck: ${deck.length}`)
+
   GameLogic.createPlayers(numberOfPlayers, deck, participants)
-  console.table(participants)
+  GameLogic.cardsLeftMessage(deck)
 
   GameLogic.firstDeal(deck, participants)
+  GameLogic.cardsLeftMessage(deck)
 
   GameLogic.playTurn(deck, participants)
-  console.log(participants)
+  GameLogic.cardsLeftMessage(deck)
 }
 
 try {
