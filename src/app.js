@@ -8,6 +8,7 @@
  */
 // Imports
 import * as GameLogic from './GameLogic.js'
+import { createPlayers } from './PlayerCreation.js'
 import ChoosePlayers from './ChoosePlayers.js'
 import { Deck } from './Deck.js'
 
@@ -24,7 +25,7 @@ export const main = function () {
   const deck = Deck.create()
   Deck.shuffle(deck)
 
-  GameLogic.createPlayers(numberOfPlayers, deck, participants)
+  createPlayers(numberOfPlayers, participants)
   GameLogic.cardsLeftMessage(deck)
 
   GameLogic.firstDeal(deck, participants)
