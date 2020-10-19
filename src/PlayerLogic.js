@@ -1,8 +1,11 @@
 import { askForOneCard } from './CardPicker.js'
 import { Player } from './Player.js'
-import { throwCardsToBin } from './GameLogic.js'
 
-export function checkPlayerWin (player, deck, usedCards) {
+/**
+ * @param player
+ * @param deck
+ */
+export function checkPlayerWin (player, deck) {
   while (player.winStatus === false && player.sum < 14) {
     player.hand.push(askForOneCard(deck))
     player.sum = Player.sum(player.hand)

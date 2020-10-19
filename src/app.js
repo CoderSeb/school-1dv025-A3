@@ -10,7 +10,7 @@
 import * as GameLogic from './GameLogic.js'
 import { createPlayers } from './PlayerCreation.js'
 import ChoosePlayers from './ChoosePlayers.js'
-import { Deck } from './Deck.js'
+import * as DeckHandler from './DeckHandler.js'
 
 export const main = function () {
   process.on('exit', (code) => {
@@ -21,10 +21,7 @@ export const main = function () {
   console.log(`You have chosen ${numberOfPlayers} players.`)
 
   const participants = []
-
-  const deck = Deck.create()
-  Deck.shuffle(deck)
-
+  const deck = DeckHandler.createAndShuffle()
   createPlayers(numberOfPlayers, participants)
   GameLogic.cardsLeftMessage(deck)
 

@@ -5,7 +5,7 @@
  * @param {number} x - Amount of cards to be picked.
  * @returns {object[]} hand - as the card(s) picked.
  */
-function cardPicker (deck, x) {
+export function cardPicker (deck, x) {
   let hand = 0
   if (x === hand) {
     return hand
