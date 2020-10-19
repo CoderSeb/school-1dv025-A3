@@ -23,14 +23,7 @@ export function throwCardsToBin (playerhand, playedCards) {
   playerhand = []
 }
 
-function dealerWon (player, dealer) {
-  console.log(`Dealer got ${dealer.sum}\nDealer has won! ${player.name} is out...`)
-}
-
-const winners = []
 const playedCards = []
-
-
 
 export function playTurn (deck, players) {
   let thisPlayer = {}
@@ -40,9 +33,14 @@ export function playTurn (deck, players) {
     thisPlayer.hand.push(askForOneCard(deck))
     thisPlayer.sum = Player.sum(thisPlayer.hand)
     thisPlayer.winStatus = false
+    thisPlayer.looseStatus = false
     consoleThis(thisPlayer)
     checkPlayerWin(thisPlayer, deck, playedCards)
+    if (thisPlayer.winStatus === true || thisPlayer.looseStatus === true) {
+      players.splice(thisPlayer, 1)
+    }
   }
+
   for (let i = 1; i < players.length; i++) {
     dealer = players[0]
     thisPlayer = players[i]
