@@ -2,8 +2,10 @@ import { askForOneCard } from './CardPicker.js'
 import { Player } from './Player.js'
 
 /**
- * @param player
- * @param deck
+ * Function check if player has a winning or loosing hand.
+ *
+ * @param {object} player - The player object.
+ * @param {object[]} deck - The deck to draw cards from.
  */
 export function checkPlayerWin (player, deck) {
   while (player.winStatus === false && player.sum < 14) {

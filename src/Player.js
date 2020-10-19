@@ -23,7 +23,7 @@ export const randomName = function () {
 }
 
 /**
- * Class representing a player.
+ * Class representing a participant.
  *
  * @class Player
  */
@@ -32,7 +32,7 @@ export class Player {
    * Creates an instance of Player.
    *
    * @param {string} name - The name of the created player.
-   * @param {*} hand - The cards on hand on the created player.
+   * @param {object[]} hand - The cards on hand of created player.
    * @memberof Player
    */
   constructor (name, hand) {

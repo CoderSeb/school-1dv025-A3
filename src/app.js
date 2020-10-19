@@ -12,6 +12,9 @@ import { createPlayers } from './PlayerCreation.js'
 import ChoosePlayers from './ChoosePlayers.js'
 import * as DeckHandler from './DeckHandler.js'
 
+/**
+ * Main function that calls for the functions that makes up the game of 21.
+ */
 export const main = function () {
   process.on('exit', (code) => {
     console.log(`About to exit with code: ${code}. Good bye!`)
