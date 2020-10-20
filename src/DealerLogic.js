@@ -7,10 +7,11 @@ import { Player } from './Player.js'
  * @param {object} player - The player to play against the dealer.
  * @param {object} dealer - The dealer to play against the player.
  * @param {object[]} deck - The deck to draw cards from.
+ * @param {object[]} playedCards - The deck of used cards.
  */
-export function checkDealerWin (player, dealer, deck) {
+export function checkDealerWin (player, dealer, deck, playedCards) {
   while (dealer.sum < 15) {
-    dealer.hand.push(askForOneCard(deck))
+    dealer.hand.push(askForOneCard(deck, playedCards))
     dealer.sum = Player.sum(dealer.hand)
     console.log(`Dealer picks another card. New hand is ${dealer.hand.join(', ')}. Current value is ${dealer.sum}`)
   }

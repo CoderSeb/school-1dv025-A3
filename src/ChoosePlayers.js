@@ -8,8 +8,8 @@ export default function () {
   if (process.argv.length > 2) {
     amountOfPlayers = process.argv.slice(2).map(Number)
     if (isNaN(amountOfPlayers)) {
-      console.log('Invalid number!')
-      process.exit(0)
+      console.error('Number of players needs to be a number!')
+      process.exit(26)
     } else {
       return amountOfPlayers
     }

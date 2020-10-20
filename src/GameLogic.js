@@ -3,6 +3,8 @@ import { askForOneCard } from './CardPicker.js'
 import { checkPlayerWin } from './PlayerLogic.js'
 import { checkDealerWin } from './DealerLogic.js'
 
+const playedCards = []
+
 /**
  * Function to deal each player one card.
  *
@@ -13,7 +15,7 @@ import { checkDealerWin } from './DealerLogic.js'
 export function firstDeal (deck, players) {
   console.log('Time for first deal! Each player except the dealer gets one card each.')
   for (let i = 1; i < players.length; i++) {
-    players[i].hand.push(askForOneCard(deck))
+    players[i].hand.push(askForOneCard(deck, playedCards))
   }
   return players
 }
@@ -40,14 +42,13 @@ export function consoleThis (name) {
  * Function that removes cards from the players hand and puts them in a new array of used cards.
  *
  * @param {object[]} playerhand - The players cards.
- * @param {object[]} playedCards - The used cards.
  */
-export function throwCardsToBin (playerhand, playedCards) {
-  playedCards.push(playerhand.splice(0, playerhand.length))
+export function throwCardsToBin (playerhand) {
+  for (let i = 0; i < playerhand.length; i++) {
+    playedCards.push(playerhand.splice(0, 1))
+  }
   playerhand = []
 }
-
-const playedCards = []
 
 /**
  * Function that plays a turn. It takes in the deck of cards and array of players
@@ -61,17 +62,17 @@ export function playTurn (deck, players) {
   let dealer = {}
   for (let i = 1; i < players.length; i++) {
     thisPlayer = players[i]
-    thisPlayer.hand.push(askForOneCard(deck))
+    thisPlayer.hand.push(askForOneCard(deck, playedCards))
     thisPlayer.sum = Player.sum(thisPlayer.hand)
     thisPlayer.winStatus = false
     thisPlayer.looseStatus = false
     consoleThis(thisPlayer)
-    checkPlayerWin(thisPlayer, deck)
+    checkPlayerWin(thisPlayer, deck, playedCards)
   }
 
   for (let i = 0; i < players.length; i++) {
     if (players[i].winStatus === true || players[i].looseStatus === true) {
-      throwCardsToBin(players[i].hand, playedCards)
+      throwCardsToBin(players[i].hand)
       players.splice(i, 1)
       i -= 1
     }
@@ -84,12 +85,13 @@ export function playTurn (deck, players) {
     dealer.looseStatus = false
     console.log(`\nTime for dealer to play against ${thisPlayer.name}`)
     consoleThis(thisPlayer)
-    throwCardsToBin(dealer.hand, playedCards)
+    throwCardsToBin(dealer.hand)
     for (let n = 0; n < 2; n++) {
-      dealer.hand.push(askForOneCard(deck))
+      dealer.hand.push(askForOneCard(deck, playedCards))
       dealer.sum = Player.sum(dealer.hand)
     }
     consoleThis(dealer)
-    checkDealerWin(thisPlayer, dealer, deck)
+    checkDealerWin(thisPlayer, dealer, deck, playedCards)
   }
+  console.table(playedCards)
 }

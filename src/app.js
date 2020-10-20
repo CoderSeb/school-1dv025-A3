@@ -6,15 +6,14 @@
  * @author Sebastian Åkerblom <sa224ny@student.lnu.se>
  * @version 1.0.0
  */
+
 // Imports
 import * as GameLogic from './GameLogic.js'
 import { createPlayers } from './PlayerCreation.js'
 import ChoosePlayers from './ChoosePlayers.js'
-import * as DeckHandler from './DeckHandler.js'
+import { createAndShuffle } from './DeckHandler.js'
 
-/**
- * Main function that calls for the functions that makes up the game of 21.
- */
+// Main Function
 export const main = function () {
   process.on('exit', (code) => {
     console.log(`About to exit with code: ${code}. Good bye!`)
@@ -24,7 +23,7 @@ export const main = function () {
   console.log(`You have chosen ${numberOfPlayers} players.`)
 
   const participants = []
-  const deck = DeckHandler.createAndShuffle()
+  const deck = createAndShuffle()
   createPlayers(numberOfPlayers, participants)
   GameLogic.cardsLeftMessage(deck)
 
