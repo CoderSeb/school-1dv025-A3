@@ -37,5 +37,6 @@ export function checkDealerWin (player, dealer, deck, playedCards) {
   }
   if (dealer.sum < player.sum) {
     console.log(`${player.name} wins!`)
+    player.winStatus = true
   }
 }

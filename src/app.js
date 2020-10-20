@@ -12,14 +12,16 @@ import * as GameLogic from './GameLogic.js'
 import { createPlayers } from './PlayerCreation.js'
 import ChoosePlayers from './ChoosePlayers.js'
 import { createAndShuffle } from './DeckHandler.js'
+import { setExitCode } from './CustomErrors.js'
 
 // Main Function
 export const main = function () {
   process.on('exit', (code) => {
-    console.log(`About to exit with code: ${code}. Good bye!`)
+    console.log('Application is about to exit with code: ', code)
   })
   ChoosePlayers()
   const numberOfPlayers = ChoosePlayers()
+  setExitCode(numberOfPlayers)
   console.log(`You have chosen ${numberOfPlayers} players.`)
 
   const participants = []
@@ -37,5 +39,6 @@ export const main = function () {
 try {
   main()
 } catch (err) {
-  console.error(err.message)
+  console.error(err)
+  process.exit(1)
 }

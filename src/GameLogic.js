@@ -93,5 +93,4 @@ export function playTurn (deck, players) {
     consoleThis(dealer)
     checkDealerWin(thisPlayer, dealer, deck, playedCards)
   }
-  console.table(playedCards)
 }

@@ -20,7 +20,7 @@ export function cardPicker (deck, x, playedCards) {
         }
         Deck.shuffle(deck)
       } else {
-        throw new Error('Not enough cards left, please choose a valid number of players!')
+        process.exit(27)
       }
     } else {
       hand = deck.splice(0, x)
