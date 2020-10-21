@@ -10,22 +10,29 @@ import { Deck } from './Deck.js'
  */
 export function cardPicker (deck, x, playedCards) {
   let hand = 0
+  const shuffleBoard = []
   if (x === hand) {
     return hand
-  } else {
-    if (deck.length < 2) {
-      if (playedCards.length > 1) {
-        for (let i = 0; i < playedCards.length; i++) {
-          deck.push(playedCards.splice(0, 1))
-        }
-        Deck.shuffle(deck)
-      } else {
-        process.exit(27)
-      }
-    } else {
-      hand = deck.splice(0, x)
-      return hand
+  } else if (deck.length < 1 && playedCards.length > 1) {
+    for (const card of playedCards) {
+      shuffleBoard.push(card[0])
+      playedCards = []
     }
+    for (const card of deck) {
+      shuffleBoard.push(card)
+    }
+    deck = shuffleBoard
+    console.log(`Out of cards in the draw pile, reshuffling the remaining cards...\nCards remaining: ${deck.length}.`)
+    Deck.shuffle(deck)
+    hand = deck.splice(0, x)
+    return hand
+  } else if (playedCards.length < 1 && deck.length < 1) {
+    const err = new Error('Not enough cards left in the draw pile!')
+    err.name = 'NotEnoughCardsLeft'
+    throw err
+  } else {
+    hand = deck.splice(0, x)
+    return hand
   }
 }
 

@@ -42,12 +42,14 @@ export function consoleThis (name) {
  * Function that removes cards from the players hand and puts them in a new array of used cards.
  *
  * @param {object[]} playerhand - The players cards.
+ * @returns {any[]} as an empty array.
  */
 export function throwCardsToBin (playerhand) {
-  for (let i = 0; i < playerhand.length; i++) {
-    playedCards.push(playerhand.splice(0, 1))
+  for (const card of playerhand) {
+    playedCards.push(card)
   }
   playerhand = []
+  return playerhand
 }
 
 /**
@@ -61,6 +63,7 @@ export function playTurn (deck, players) {
   let thisPlayer = {}
   let dealer = {}
   for (let i = 1; i < players.length; i++) {
+    dealer = players[0]
     thisPlayer = players[i]
     thisPlayer.hand.push(askForOneCard(deck, playedCards))
     thisPlayer.sum = Player.sum(thisPlayer.hand)
@@ -68,29 +71,21 @@ export function playTurn (deck, players) {
     thisPlayer.looseStatus = false
     consoleThis(thisPlayer)
     checkPlayerWin(thisPlayer, deck, playedCards)
-  }
-
-  for (let i = 0; i < players.length; i++) {
-    if (players[i].winStatus === true || players[i].looseStatus === true) {
-      throwCardsToBin(players[i].hand)
+    if (thisPlayer.winStatus === true || thisPlayer.looseStatus === true) {
+      throwCardsToBin(thisPlayer.hand)
       players.splice(i, 1)
       i -= 1
+    } else {
+      dealer.winStatus = false
+      dealer.looseStatus = false
+      console.log(`\nTime for dealer to play against ${thisPlayer.name}`)
+      dealer.hand = throwCardsToBin(dealer.hand)
+      for (let n = 0; n < 2; n++) {
+        dealer.hand.push(askForOneCard(deck, playedCards))
+        dealer.sum = Player.sum(dealer.hand)
+      }
+      consoleThis(dealer)
+      checkDealerWin(thisPlayer, dealer, deck, playedCards)
     }
-  }
-
-  for (let i = 1; i < players.length; i++) {
-    dealer = players[0]
-    thisPlayer = players[i]
-    dealer.winStatus = false
-    dealer.looseStatus = false
-    console.log(`\nTime for dealer to play against ${thisPlayer.name}`)
-    consoleThis(thisPlayer)
-    throwCardsToBin(dealer.hand)
-    for (let n = 0; n < 2; n++) {
-      dealer.hand.push(askForOneCard(deck, playedCards))
-      dealer.sum = Player.sum(dealer.hand)
-    }
-    consoleThis(dealer)
-    checkDealerWin(thisPlayer, dealer, deck, playedCards)
   }
 }

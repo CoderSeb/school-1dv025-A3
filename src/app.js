@@ -12,7 +12,7 @@ import * as GameLogic from './GameLogic.js'
 import { createPlayers } from './PlayerCreation.js'
 import ChoosePlayers from './ChoosePlayers.js'
 import { createAndShuffle } from './DeckHandler.js'
-import { setExitCode } from './CustomErrors.js'
+import { checkError, setExitCode } from './CustomErrors.js'
 
 // Main Function
 export const main = function () {
@@ -39,6 +39,5 @@ export const main = function () {
 try {
   main()
 } catch (err) {
-  console.error(err)
-  process.exit(1)
+  checkError(err)
 }
