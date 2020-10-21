@@ -15,7 +15,10 @@ export const randomName = function () {
     'Mats',
     'Johan',
     'Jörgen',
-    'Gustav'
+    'Gustav',
+    'Nils',
+    'Peter',
+    'Rune'
   ]
 
   const randomPick = nameArray[Math.floor(Math.random() * nameArray.length)]

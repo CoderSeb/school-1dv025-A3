@@ -5,34 +5,11 @@ import { Deck } from './Deck.js'
  *
  * @param {object[]} deck - The deck to be drawn from.
  * @param {number} x - Amount of cards to be picked.
- * @param {object[]} playedCards - The array of played cards.
  * @returns {object[]} hand - as the card(s) picked.
  */
-export function cardPicker (deck, x, playedCards) {
-  let hand = 0
-  if (deck.length < 2 && playedCards.length > 1) {
-    let shuffleBoard = []
-    for (const card of playedCards) {
-      shuffleBoard.push(card[0])
-    }
-    for (const card of deck) {
-      shuffleBoard.push(card)
-    }
-    playedCards = []
-    deck = shuffleBoard
-    shuffleBoard = []
-    console.log(`Out of cards in the draw pile, reshuffling the remaining cards...\nCards remaining: ${deck.length}.`)
-    Deck.shuffle(deck)
-    hand = deck.splice(0, x)
-    return hand
-  } else if (playedCards.length < 1 && deck.length < 1) {
-    const err = new Error('Not enough cards left in the draw pile!')
-    err.name = 'NotEnoughCardsLeft'
-    throw err
-  } else {
-    hand = deck.splice(0, x)
-    return hand
-  }
+export function cardPicker (deck, x) {
+  const hand = deck.splice(0, x)
+  return hand
 }
 
 /**
@@ -43,6 +20,30 @@ export function cardPicker (deck, x, playedCards) {
  * @returns {object} card - The returned card.
  */
 export function askForOneCard (deck, playedCards) {
-  const card = cardPicker(deck, 1, playedCards)
-  return card
+  if (deck.length < 2 && playedCards.length > 1) {
+    let shuffleBoard = []
+    for (const playCard of playedCards) {
+      shuffleBoard.push(playCard[0])
+    }
+    for (const playCard of deck) {
+      shuffleBoard.push(playCard)
+    }
+    playedCards.splice(0, playedCards.length)
+    deck.splice(0, deck.length)
+    for (const card of shuffleBoard) {
+      deck.push(card)
+    }
+    shuffleBoard = []
+    console.log(`Out of cards in the draw pile, reshuffling the remaining cards...\nCards remaining: ${deck.length}.`)
+    Deck.shuffle(deck)
+    const card = cardPicker(deck, 1)
+    return card
+  } else if (playedCards.length < 1 && deck.length < 1) {
+    const err = new Error('Not enough cards left in the draw pile!')
+    err.name = 'NotEnoughCardsLeft'
+    throw err
+  } else {
+    const card = cardPicker(deck, 1)
+    return card
+  }
 }
