@@ -1,5 +1,6 @@
 import { askForOneCard } from './CardPicker.js'
 import { Player } from './Player.js'
+import { throwCardsToBin } from './GameLogic.js'
 
 /**
  * Function to check if the dealer wins.
@@ -39,4 +40,5 @@ export function checkDealerWin (player, dealer, deck, playedCards) {
     console.log(`${player.name} wins!`)
     player.winStatus = true
   }
+  dealer.hand = throwCardsToBin(dealer.hand, playedCards)
 }

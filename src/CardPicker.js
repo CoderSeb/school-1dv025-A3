@@ -10,18 +10,17 @@ import { Deck } from './Deck.js'
  */
 export function cardPicker (deck, x, playedCards) {
   let hand = 0
-  const shuffleBoard = []
-  if (x === hand) {
-    return hand
-  } else if (deck.length < 1 && playedCards.length > 1) {
+  if (deck.length < 2 && playedCards.length > 1) {
+    let shuffleBoard = []
     for (const card of playedCards) {
       shuffleBoard.push(card[0])
-      playedCards = []
     }
     for (const card of deck) {
       shuffleBoard.push(card)
     }
+    playedCards = []
     deck = shuffleBoard
+    shuffleBoard = []
     console.log(`Out of cards in the draw pile, reshuffling the remaining cards...\nCards remaining: ${deck.length}.`)
     Deck.shuffle(deck)
     hand = deck.splice(0, x)

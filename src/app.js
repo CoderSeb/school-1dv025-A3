@@ -26,14 +26,16 @@ export const main = function () {
 
   const participants = []
   const deck = createAndShuffle()
+  const throwPile = []
+
   createPlayers(numberOfPlayers, participants)
-  GameLogic.cardsLeftMessage(deck)
+  GameLogic.cardsLeftMessage(deck, throwPile)
 
-  GameLogic.firstDeal(deck, participants)
-  GameLogic.cardsLeftMessage(deck)
+  GameLogic.firstDeal(deck, participants, throwPile)
+  GameLogic.cardsLeftMessage(deck, throwPile)
 
-  GameLogic.playTurn(deck, participants)
-  GameLogic.cardsLeftMessage(deck)
+  GameLogic.playTurn(deck, participants, throwPile)
+  GameLogic.cardsLeftMessage(deck, throwPile)
 }
 
 try {
