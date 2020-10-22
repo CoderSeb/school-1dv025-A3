@@ -1,31 +1,4 @@
 /**
- * Function to pick a random name from the array of names created in the function.
- *
- * @returns {string} randomPick - As the random name.
- */
-export const randomName = function () {
-  const nameArray = [
-    'Gösta',
-    'Kalle',
-    'Martin',
-    'David',
-    'Sebastian',
-    'Ida',
-    'Susanne',
-    'Mats',
-    'Johan',
-    'Jörgen',
-    'Gustav',
-    'Nils',
-    'Peter',
-    'Rune'
-  ]
-
-  const randomPick = nameArray[Math.floor(Math.random() * nameArray.length)]
-  return randomPick
-}
-
-/**
  * Class representing a participant.
  *
  * @class Player
@@ -34,17 +7,43 @@ export class Player {
   /**
    * Creates an instance of Player.
    *
-   * @param {string} name - The name of the created player.
-   * @param {object[]} hand - The cards on hand of created player.
+   * @param {object[]} hand - As the player hand.
    * @memberof Player
    */
-  constructor (name, hand) {
-    this.name = name
+  constructor (hand) {
+    this.name = this.randomName()
     this.hand = hand
     if (hand === 0) {
       this.hand = []
     }
     this.sum = Player.sum(hand)
+  }
+
+  /**
+   * A random name method for players.
+   *
+   * @returns {string} randomPick - As the random name.
+   */
+  randomName () {
+    const nameArray = [
+      'Gösta',
+      'Kalle',
+      'Martin',
+      'David',
+      'Sebastian',
+      'Ida',
+      'Susanne',
+      'Mats',
+      'Johan',
+      'Jörgen',
+      'Gustav',
+      'Nils',
+      'Peter',
+      'Rune'
+    ]
+
+    const randomPick = nameArray[Math.floor(Math.random() * nameArray.length)]
+    return randomPick
   }
 
   /**

@@ -12,7 +12,7 @@ import * as GameLogic from './GameLogic.js'
 import { createPlayers } from './PlayerCreation.js'
 import ChoosePlayers from './ChoosePlayers.js'
 import { createAndShuffle } from './DeckHandler.js'
-import { checkError, setExitCode } from './CustomErrors.js'
+import { checkError, checkInput } from './CustomErrors.js'
 
 // Main Function
 export const main = function () {
@@ -21,7 +21,7 @@ export const main = function () {
   })
   ChoosePlayers()
   const numberOfPlayers = ChoosePlayers()
-  setExitCode(numberOfPlayers)
+  checkInput(numberOfPlayers)
   console.log(`You have chosen ${numberOfPlayers} players.`)
 
   const participants = []
@@ -35,11 +35,11 @@ export const main = function () {
   GameLogic.cardsLeftMessage(deck, throwPile)
 
   GameLogic.playTurn(deck, participants, throwPile)
-  GameLogic.cardsLeftMessage(deck, throwPile)
 }
 
 try {
   main()
 } catch (err) {
   checkError(err)
+  console.error(err.message)
 }

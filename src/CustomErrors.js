@@ -1,11 +1,17 @@
 /**
- * Function to validate the npm input.
+ * Function to validate the start input.
  *
  * @param {number} amountOfPlayers - The input to be validated.
+ * @throws {TypeError} as InvalidPlayersError
  */
-export const setExitCode = function (amountOfPlayers) {
-  if (!Number.isInteger(amountOfPlayers) || (amountOfPlayers < 1 || amountOfPlayers > 7)) {
-    process.exitCode = 26
+export const checkInput = function (amountOfPlayers) {
+  const err = new TypeError('Invalid number of players!')
+  err.name = 'InvalidPlayersError'
+  if (!Number.isInteger(amountOfPlayers)) {
+    throw err
+  }
+  if ((amountOfPlayers !== 20 && amountOfPlayers !== 50) && (amountOfPlayers < 1 || amountOfPlayers > 7)) {
+    throw err
   }
 }
 
@@ -17,5 +23,8 @@ export const setExitCode = function (amountOfPlayers) {
 export const checkError = function (err) {
   if (err.name === 'NotEnoughCardsLeft') {
     process.exitCode = 27
+  }
+  if (err.name === 'InvalidPlayersError') {
+    process.exitCode = 26
   }
 }
