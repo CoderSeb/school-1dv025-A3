@@ -1,7 +1,7 @@
 // Imports
 import { askForOneCard } from './CardPicker.js'
 import { Player } from './Player.js'
-import { throwCardsToBin } from './GameLogic.js'
+import { throwCardsToBin } from './DeckHandler.js'
 
 /**
  * Function to check if the dealer wins.
