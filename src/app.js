@@ -11,7 +11,7 @@
 import * as GameLogic from './GameLogic.js'
 import { createPlayers } from './PlayerCreation.js'
 import ChoosePlayers from './ChoosePlayers.js'
-import { createAndShuffle } from './DeckHandler.js'
+import { createAndShuffle, firstDeal } from './DeckHandler.js'
 import { checkError, checkInput } from './CustomErrors.js'
 
 // Main Function
@@ -31,7 +31,7 @@ export const main = function () {
   createPlayers(numberOfPlayers, participants)
   GameLogic.cardsLeftMessage(deck, throwPile)
 
-  GameLogic.firstDeal(deck, participants, throwPile)
+  firstDeal(deck, participants, throwPile)
   GameLogic.cardsLeftMessage(deck, throwPile)
 
   GameLogic.playTurn(deck, participants, throwPile)

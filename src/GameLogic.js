@@ -6,22 +6,6 @@ import { checkDealerWin } from './DealerLogic.js'
 import { throwCardsToBin } from './DeckHandler.js'
 
 /**
- * Function to deal each player one card.
- *
- * @param {object[]} deck - As the deck to draw cards from.
- * @param {object[]} players - The array of players to get a card each.
- * @param {object[]} playedCards - As the array of used cards.
- * @returns {object[]} as the array of players now with one card in hand.
- */
-export function firstDeal (deck, players, playedCards) {
-  console.log('Time for first deal! Each player except the dealer gets one card each.')
-  for (let i = 1; i < players.length; i++) {
-    players[i].hand.push(askForOneCard(deck, playedCards))
-  }
-  return players
-}
-
-/**
  * Function that prints out the amount of cards left in the deck.
  *
  * @param {object[]} deck - The array of cards.
