@@ -21,7 +21,8 @@ const rndNumber = function (topValue, bottomValue) {
  * @param {object[]} playedCards - The deck of used cards.
  */
 export function checkPlayerWin (player, deck, playedCards) {
-  while (player.winStatus === false && player.sum < rndNumber(19, 16)) {
+  player.stopValue = rndNumber(19, 15)
+  while (player.winStatus === false && player.sum < player.stopValue) {
     player.hand.push(askForOneCard(deck, playedCards))
     player.sum = Player.sum(player.hand)
     console.log(`${player.name} picks another card. Hand is now ${player.hand.join(', ')}.\nCurrent sum is ${player.sum}`)
@@ -37,5 +38,8 @@ export function checkPlayerWin (player, deck, playedCards) {
   if (player.sum > 21) {
     console.log(`${player.name} has got ${player.sum}... BUSTED!`)
     player.looseStatus = true
+  }
+  if ((player.winStatus === false && player.looseStatus === false) && player.sum >= player.stopValue) {
+    console.log(`${player.name} is satisfied with his hand.`)
   }
 }

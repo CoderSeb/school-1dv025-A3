@@ -31,15 +31,16 @@ export class Player {
       'Martin',
       'David',
       'Sebastian',
-      'Ida',
-      'Susanne',
       'Mats',
       'Johan',
       'Jörgen',
       'Gustav',
       'Nils',
       'Peter',
-      'Rune'
+      'Rune',
+      'Lars',
+      'Stefan',
+      'Tobias'
     ]
 
     const randomPick = nameArray[Math.floor(Math.random() * nameArray.length)]

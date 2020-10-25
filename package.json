@@ -17,7 +17,7 @@
   "contributors": [
     "Johan Leitet <johan.leitet@lnu.se>",
     "Mats Loock <mats.loock@lnu.se>",
-    "// TODO: YOUR NAME <YOUR EMAIL>"
+    "Sebastian Åkerblom <sa224ny@student.lnu.se"
   ],
   "devDependencies": {
     "@lnu/eslint-config": "^1.1.0",
