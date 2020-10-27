@@ -1,3 +1,10 @@
+/**
+ * Module for the player game logic.
+ *
+ * @author Sebastian Åkerblom <sa224ny@student.lnu.se>
+ * @version 1.0.0
+ */
+
 // Imports
 import { askForOneCard } from './CardPicker.js'
 import { Player } from './Player.js'

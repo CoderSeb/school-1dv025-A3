@@ -1,3 +1,11 @@
+/**
+ * Module for giving cards.
+ *
+ * @author Sebastian Åkerblom <sa224ny@student.lnu.se>
+ * @version 1.0.0
+ */
+
+// Imports
 import { Deck } from './Deck.js'
 
 /**
@@ -34,7 +42,7 @@ export function askForOneCard (deck, playedCards) {
       deck.push(card)
     }
     shuffleBoard = []
-    console.log(`Out of cards in the draw pile, reshuffling the remaining cards...\nCards remaining: ${deck.length}.`)
+    console.log(`\nOut of cards in the draw pile, reshuffling the remaining cards...\nCards remaining: ${deck.length}.\n`)
     Deck.shuffle(deck)
     const card = cardPicker(deck, 1)
     return card

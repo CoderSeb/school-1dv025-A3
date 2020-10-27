@@ -1,3 +1,10 @@
+/**
+ * Module for the deck handling.
+ *
+ * @author Sebastian Åkerblom <sa224ny@student.lnu.se>
+ * @version 1.0.0
+ */
+
 // Imports
 import { Deck } from './Deck.js'
 import { askForOneCard } from './CardPicker.js'

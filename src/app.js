@@ -15,7 +15,7 @@ import { createAndShuffle, firstDeal } from './DeckHandler.js'
 import { checkError, checkInput } from './CustomErrors.js'
 
 // Main Function
-export const main = function () {
+const main = function () {
   process.on('exit', (code) => {
     console.log('Application is about to exit with code: ', code)
   })

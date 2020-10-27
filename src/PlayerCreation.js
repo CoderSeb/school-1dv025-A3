@@ -1,3 +1,10 @@
+/**
+ * Module for the creation of players and one dealer.
+ *
+ * @author Sebastian Åkerblom <sa224ny@student.lnu.se>
+ * @version 1.0.0
+ */
+
 // Imports
 import { Player } from './Player.js'
 

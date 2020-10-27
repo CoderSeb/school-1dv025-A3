@@ -1,4 +1,11 @@
 /**
+ * Module for the validation of input and error checking.
+ *
+ * @author Sebastian Åkerblom <sa224ny@student.lnu.se>
+ * @version 1.0.0
+ */
+
+/**
  * Function to validate the start input.
  *
  * @param {number} amountOfPlayers - The input to be validated.

@@ -1,4 +1,11 @@
 /**
+ * Module for the Player class.
+ *
+ * @author Sebastian Åkerblom <sa224ny@student.lnu.se>
+ * @version 1.0.0
+ */
+
+/**
  * Class representing a participant.
  *
  * @class Player

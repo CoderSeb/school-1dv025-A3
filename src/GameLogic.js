@@ -1,3 +1,10 @@
+/**
+ * Module for the main game logic.
+ *
+ * @author Sebastian Åkerblom <sa224ny@student.lnu.se>
+ * @version 1.0.0
+ */
+
 // Imports
 import { Player } from './Player.js'
 import { askForOneCard } from './CardPicker.js'
@@ -36,6 +43,13 @@ export function playTurn (deck, players, playedCards) {
   let thisPlayer = {}
   let dealer = {}
   for (let i = 1; i < players.length; i++) {
+    if (i < players.length) {
+      let line = ''
+      for (let n = 0; n < 80; n++) {
+        line += '-'
+      }
+      console.log(line)
+    }
     dealer = players[0]
     thisPlayer = players[i]
     thisPlayer.hand.push(askForOneCard(deck, playedCards))
