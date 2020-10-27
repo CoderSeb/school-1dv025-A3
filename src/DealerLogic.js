@@ -12,7 +12,7 @@ import { throwCardsToBin } from './DeckHandler.js'
  * @param {object[]} playedCards - The deck of used cards.
  */
 export function checkDealerWin (player, dealer, deck, playedCards) {
-  while (dealer.sum < 16) {
+  while (dealer.sum <= 16) {
     dealer.hand.push(askForOneCard(deck, playedCards))
     dealer.sum = Player.sum(dealer.hand)
     console.log(`Dealer picks another card. New hand is ${dealer.hand.join(', ')}. Current value is ${dealer.sum}`)
