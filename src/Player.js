@@ -71,10 +71,11 @@ export class Player {
         value.push(card[0])
       }
       result = value.reduce((a, b) => a + b, 0)
+      const originalResult = result
       if (value.some(x => x.rank === 1) && result <= 8) {
         result = result + 13
       }
-      if (value.some(x => x.rank === 14) && result > 21) {
+      if (value.some(x => x.rank === 1) && result > originalResult && result > 21) {
         result = result - 13
       }
       return result
