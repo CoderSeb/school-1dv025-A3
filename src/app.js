@@ -19,7 +19,6 @@ const main = function () {
   process.on('exit', (code) => {
     console.log('Application is about to exit with code: ', code)
   })
-  ChoosePlayers()
   const numberOfPlayers = ChoosePlayers()
   checkInput(numberOfPlayers)
   console.log(`You have chosen ${numberOfPlayers} players.`)
