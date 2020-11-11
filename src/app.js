@@ -3,33 +3,42 @@
  *
  * @author Johan Leitet <johan.leitet@lnu.se>
  * @author Mats Loock <mats.loock@lnu.se>
- * @author // TODO: YOUR NAME <YOUR EMAIL>
+ * @author Sebastian Åkerblom <sa224ny@student.lnu.se>
  * @version 1.0.0
  */
 
-// TODO: Replace the code below with your own game logic.
+// Imports
+import * as GameLogic from './GameLogic.js'
+import { createPlayers } from './PlayerCreation.js'
+import ChoosePlayers from './ChoosePlayers.js'
+import { createAndShuffle, firstDeal } from './DeckHandler.js'
+import { checkError, checkInput } from './CustomErrors.js'
 
-import { Deck } from './Deck.js'
+// Main Function
+const main = function () {
+  process.on('exit', (code) => {
+    console.log('Application is about to exit with code: ', code)
+  })
+  const numberOfPlayers = ChoosePlayers()
+  checkInput(numberOfPlayers)
+  console.log(`You have chosen ${numberOfPlayers} players.`)
+
+  const participants = []
+  const deck = createAndShuffle()
+  const throwPile = []
+
+  createPlayers(numberOfPlayers, participants)
+  GameLogic.cardsLeftMessage(deck, throwPile)
+
+  firstDeal(deck, participants, throwPile)
+  GameLogic.cardsLeftMessage(deck, throwPile)
+
+  GameLogic.playTurn(deck, participants, throwPile)
+}
 
 try {
-  // Create 52 playing cards and...
-  const playingCards = Deck.create()
-  console.log(playingCards.join(', '), '\n')
-
-  // ...shuffle them.
-  Deck.shuffle(playingCards)
-  console.log(playingCards.join(', '), '\n')
-
-  // Draw three playing cards, view the remaining playing cards, the drawn playing cards and
-  // then calculate the value of them.
-  // (`value + playingCard` implicitly calls PlayingCard#valueOf to get
-  //  the primitive value of the current PlayingCard object.)
-  const hand = playingCards.splice(0, 3)
-
-  console.log(playingCards.join(', '))
-
-  const value = hand.reduce((value, playingCard) => value + playingCard, 0)
-  console.log(`${hand.join(' ')} (${value})`)
-} catch (e) {
-  console.error(e.message)
+  main()
+} catch (err) {
+  checkError(err)
+  console.error(err.message)
 }
